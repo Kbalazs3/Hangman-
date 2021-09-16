@@ -10,8 +10,9 @@ def start_menu():
     elif start_menu_command == 'Q':
         quit(0)
 
+
 def ask_player_name():
-    player_name = input("Enter your name: ")
+    player_name = input("Enter your name: ").capitalize()
     return player_name
 
 
@@ -128,8 +129,12 @@ def hangman_display(lives):
 
 
 def main_game_logic():
-    pass
+    player_name = ask_player_name()
+    players_lives = 7
+    while players_lives > 0:
+        pass
 
 
 if __name__ == '__main__':
-    print(get_word())
+    start_menu()
+    main_game_logic()
