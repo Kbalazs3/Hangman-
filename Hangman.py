@@ -2,10 +2,29 @@ import random
 import time
 
 
+def start_menu():
+    print("START MENU\n\nStart Game\nQuit")
+    start_menu_command = input("Enter 's' to start game and 'q' to quit game").upper()
+    if start_menu_command == 'S':
+        main_game_logic()
+    elif start_menu_command == 'Q':
+        quit(0)
+
 def ask_player_name():
     player_name = input("Enter your name: ")
     return player_name
 
+
+def get_word_for_easy_and_medium_level(selected_level):
+    with open("countries-and-capitals.txt", "r") as countries_and_capitals:
+        word_list = []
+        open_file_for_read = open("countries-and-capitals.txt", "r")
+        for line in countries_and_capitals.readlines():
+            if selected_level == "easy":
+                word_list.append(line.split('|')[0].strip())
+            elif selected_level == "hard":
+                word_list.append(line.split('|')[1].strip())
+            return word_list[random.randint(0, len(word_list) - 1)]
 
 
 def get_word_to_hard_mode():
@@ -17,10 +36,6 @@ def get_word_to_hard_mode():
 
 def print_result(winner):
     print(winner + "You have won!")
-
-
-def main_game_logic():
-    pass
 
 
 def hangman_display(lives):
@@ -110,6 +125,10 @@ def hangman_display(lives):
     ]
 
     return hangman[lives]
+
+
+def main_game_logic():
+    pass
 
 
 if __name__ == '__main__':
