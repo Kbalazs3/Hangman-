@@ -7,7 +7,8 @@ def ask_player_name():
     return player_name
 
 
-def get_word():
+
+def get_word_to_hard_mode():
     with open("words.txt", 'r') as words:
         words_red = words.read()
         words_list = words_red.split(" ")
@@ -20,6 +21,95 @@ def print_result(winner):
 
 def main_game_logic():
     pass
+
+
+def hangman_display(lives):
+    hangman = [  # You loose element 0
+        """
+            _________________________
+            |\ _____________________ /|
+            | |_____________________| |
+            |/_______________________\|
+            /=========================\ 
+            '==========================='
+            |  ~~       _|_        ~~ |
+            |        You Loose        |
+            |_________________________|
+                        """,
+
+        # 1 health
+        """
+           --------
+           |      |
+           |      O
+           |     \|/
+           |      |
+           |     / \
+           -
+        """,
+        # Two health minus
+        """
+           --------
+           |      |
+           |      O
+           |     \|/
+           |      |
+           |     / 
+           -
+        """,
+        # Three lives minus
+        """
+           --------
+           |      |
+           |      O
+           |     \|/
+           |      |
+           |      
+           -
+        """,
+        # Four lives minus
+        """
+           --------
+           |      |
+           |      O
+           |     \|
+           |      |
+           |     
+           -
+        """,
+        # Five lives minus
+        """
+           --------
+           |      |
+           |      O
+           |      |
+           |      |
+           |     
+           -
+        """,
+        # Six lives minus
+        """
+           --------
+           |      |
+           |      O
+           |    
+           |      
+           |     
+           -
+        """,
+        # Seven lives minus -> Game Over
+        """
+           --------
+           |      |
+           |      
+           |    
+           |      
+           |     
+           -
+        """
+    ]
+
+    return hangman[lives]
 
 
 if __name__ == '__main__':
