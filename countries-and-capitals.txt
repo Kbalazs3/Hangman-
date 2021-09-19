@@ -1,4 +1,4 @@
-countries-and-capitals.txtAfghanistan | Kabul
+Afghanistan | Kabul
 Albania | Tirana
 Algeria | Algiers
 Andorra | Andorra la Vella
