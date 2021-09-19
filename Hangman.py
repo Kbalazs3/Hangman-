@@ -145,6 +145,7 @@ def hangman_display(lives):
 def main_game_logic():
     player_name = ask_player_name()
     players_lives = 7
+    print(f'\nWelcome {player_name} in the Hangman Game!\n')
     selected_level = ask_difficulty_level()
     word_to_find_out = ''
     if selected_level == 'E' or selected_level == 'M':
@@ -160,7 +161,7 @@ def main_game_logic():
     print("\n")
     while not guessed and players_lives > 0:
         guess = input("Guess a letter: ")
-        print(players_lives)
+        print("Remaining lives: " + str(players_lives))
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
                 print("You tried this before! Did you forget it?", guess)
