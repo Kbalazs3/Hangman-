@@ -156,6 +156,33 @@ def main_game_logic():
     guessed_letters = []
     guessed = False
     print(hangman_display(players_lives))
+    print(word_length)
+    print("\n")
+    while not guessed and players_lives > 0:
+        guess = input("Guess a letter: ")
+        print(players_lives)
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letters:
+                print("You tried this before! Did you forget it?", guess)
+            elif guess not in word_letters:
+                print("You didn't guess it! ")
+                guessed_letters.append(guess)
+                players_lives -= 1
+            elif guess in word_letters:
+                print("Nice one!")
+                for i, letter in enumerate(word_letters):
+                    if letter != "_" and guess == letter:
+                        word_letters[i] = letter
+                guessed_letters.append(guess)
+            elif guess == "quit":
+                break
+            else:
+                print("Something Wrong! Try again")
+        elif not guessed and players_lives == 0:
+            print("You loose!")
+        else:
+            print("You Win! Congratulations!")
+        print(hangman_display(players_lives))
 
 
 if __name__ == '__main__':
