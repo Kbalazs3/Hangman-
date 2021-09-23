@@ -39,10 +39,6 @@ def get_word_to_hard_mode():
         return words_list[random.randint(0, len(words_list) - 1)]
 
 
-def print_result(winner):
-    print(winner + "You have won!")
-
-
 def ask_difficulty_level():
     difficulty_level = input("Choose difficulty level: \nEnter\n\t'e' for Easy\n\
     t'm' for Medium\n\t'h' for Hard\n: ").upper()
@@ -150,11 +146,16 @@ def main_game_logic():
     word_to_find_out = ''
     if selected_level == 'E' or selected_level == 'M':
         word_to_find_out = get_word_for_easy_and_medium_level(selected_level)
+        if selected_level == 'E':
+            print("You will have to find out a country name.")
+        elif selected_level == 'M':
+            print('You will have to find out a capital city.')
     elif selected_level == 'H':
         word_to_find_out = get_word_to_hard_mode()
+        print("You will have get any random word.")
     word_letters = list(word_to_find_out)
     word_length = "_" * len(word_to_find_out)
-    guessed_letters = []
+    tried_letters = []
     guessed = False
     print(hangman_display(players_lives))
     print(word_length)
@@ -162,27 +163,30 @@ def main_game_logic():
     while not guessed and players_lives > 0:
         guess = input("Guess a letter: ")
         print("Remaining lives: " + str(players_lives))
+        print(word_letters)
+        print(tried_letters)
         if len(guess) == 1 and guess.isalpha():
-            if guess in guessed_letters:
+            if guess in tried_letters:
                 print("You tried this before! Did you forget it?", guess)
             elif guess not in word_letters:
-                print("You didn't guess it! ")
-                guessed_letters.append(guess)
+                print("Wrong guess! That letter not in the word! ")
+                tried_letters.append(guess)
                 players_lives -= 1
             elif guess in word_letters:
                 print("Nice one!")
                 for i, letter in enumerate(word_letters):
                     if letter != "_" and guess == letter:
                         word_letters[i] = letter
-                guessed_letters.append(guess)
+                tried_letters.append(guess)
             elif guess == "quit":
                 break
             else:
                 print("Something Wrong! Try again")
-        elif not guessed and players_lives == 0:
+        elif players_lives == 0:
             print("You loose!")
-        else:
-            print("You Win! Congratulations!")
+            break
+        elif :
+            print(f'Congratulations{player_name}You Win!')
         print(hangman_display(players_lives))
 
 
