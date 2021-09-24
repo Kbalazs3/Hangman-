@@ -175,7 +175,7 @@ def main_game_logic():
             print(f'\t\t\t\t{player_name} You loose!\n\n')
             break
         elif "".join(word_length_list) == word_to_find_out:
-            print(f'\n\n\t\t\t\tCongratulations {player_name} You win!\n\n')
+            print(f'\n\n\t\t\t\t\t\tCongratulations {player_name} You win!\n\n')
             break
         print(f'\nRemaining lives: {str(players_lives)}')
         print("Tried letters: " + ", ".join(tried_letters) + "\n")
@@ -184,14 +184,14 @@ def main_game_logic():
             print("Please enter only one letter!")
             guess = input("Guess a letter: ").lower()
         if guess in tried_letters:
-            print("You tried that before!")
+            print("You have tried that before!")
         elif len(guess) == 1 and guess.isalpha() and guess not in word_letters and guess not in tried_letters:
             players_lives -= 1
             print("That's wrong! You lost one life point!\n")
             print(hangman_display(players_lives))
             if players_lives == 0:
-                print(f'{player_name} You loose!')
-                print(f'The solution would have been: {word_to_find_out}\n')
+                print(f'\n\t\t\t\t\t\t{player_name} You loose!\n\n')
+                print(f'\t\t\t\t\t\tThe solution would have been: {word_to_find_out}\n')
                 break
         elif guess in word_letters and guess not in tried_letters:
             for index, letter in enumerate(word_letters):
