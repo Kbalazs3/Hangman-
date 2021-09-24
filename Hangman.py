@@ -1,6 +1,7 @@
 import random
 import os
 import time
+import colorama
 
 
 def start_menu():
@@ -177,7 +178,7 @@ def main_game_logic():
         elif "".join(word_length_list) == word_to_find_out:
             print(f'\n\n\t\t\t\t\t\tCongratulations {player_name} You win!\n\n')
             break
-        print(f'\nRemaining lives: {str(players_lives)}')
+        print(colorama.Fore.GREEN + f'\nRemaining lives: {str(players_lives)}')
         print("Tried letters: " + ", ".join(tried_letters) + "\n")
         guess = input("Guess a letter: ").lower()
         while len(guess) != 1 and not guess.isalpha():
@@ -190,7 +191,7 @@ def main_game_logic():
             print("That's wrong! You lost one life point!\n")
             print(hangman_display(players_lives))
             if players_lives == 0:
-                print(f'\n\t\t\t\t\t\t{player_name} You loose!\n\n')
+                print(colorama.Fore.RED + f'\n\t\t\t\t\t\t{player_name} You loose!\n\n')
                 print(f'\t\t\t\t\t\tThe solution would have been: {word_to_find_out}\n')
                 break
         elif guess in word_letters and guess not in tried_letters:
@@ -206,6 +207,7 @@ def main_game_logic():
             tried_letters.append(guess)
     clear()
     start_menu()
+
 
 if __name__ == '__main__':
     start_menu()
