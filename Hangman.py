@@ -145,49 +145,52 @@ def main_game_logic():
     selected_level = ask_difficulty_level()
     word_to_find_out = ''
     if selected_level == 'E' or selected_level == 'M':
-        word_to_find_out = get_word_for_easy_and_medium_level(selected_level)
+        word_to_find_out = get_word_for_easy_and_medium_level(selected_level).lower()
         if selected_level == 'E':
             print("You will have to find out a country name.")
         elif selected_level == 'M':
             print('You will have to find out a capital city.')
     elif selected_level == 'H':
-        word_to_find_out = get_word_to_hard_mode()
+        word_to_find_out = get_word_to_hard_mode().lower()
         print("You will have get any random word.")
     word_letters = list(word_to_find_out)
     word_length = "_" * len(word_to_find_out)
+    word_length_list = list(word_length)
     tried_letters = []
     guessed = False
     print(hangman_display(players_lives))
     print(word_length)
     print("\n")
     while not guessed and players_lives > 0:
-        guess = input("Guess a letter: ")
-        print("Remaining lives: " + str(players_lives))
-        print(word_letters)
-        print(tried_letters)
-        if len(guess) == 1 and guess.isalpha():
-            if guess in tried_letters:
-                print("You tried this before! Did you forget it?", guess)
-            elif guess not in word_letters:
-                print("Wrong guess! That letter not in the word! ")
-                tried_letters.append(guess)
-                players_lives -= 1
-            elif guess in word_letters:
-                print("Nice one!")
-                for i, letter in enumerate(word_letters):
-                    if letter != "_" and guess == letter:
-                        word_letters[i] = letter
-                tried_letters.append(guess)
-            elif guess == "quit":
-                break
-            else:
-                print("Something Wrong! Try again")
-        elif players_lives == 0:
-            print("You loose!")
+        print(word_to_find_out)
+        if players_lives == 0:
+            print(f'{player_name} You loose!')
             break
-        elif :
-            print(f'Congratulations{player_name}You Win!')
-        print(hangman_display(players_lives))
+        elif "".join(word_length_list) == word_to_find_out:
+            print(f'\n\n\t\tCongratulations {player_name} You win!')
+            break
+        guess = input("Guess a letter: ").lower()
+        while len(guess) != 1 and not guess.isalpha():
+            print("please enter only one letter!")
+            guess = input("Guess a letter: ").lower()
+        if guess in tried_letters:
+            print("You tried that before!")
+        elif guess not in word_letters and guess not in tried_letters:
+            players_lives -= 1
+            print("That's wrong! You lost one life point!\n")
+            print(hangman_display(players_lives))
+            if players_lives == 0:
+                print(f'{player_name} You loose!')
+        elif guess in word_letters and guess not in tried_letters:
+            for index, letter in enumerate(word_letters):
+                if guess == letter:
+                    word_length_list[index] = guess
+        elif guess == 'quit':
+            print("Bye-bye!")
+            start_menu()
+            break
+        print("".join(word_length_list))
+        tried_letters.append(guess)
 
 
 if __name__ == '__main__':
